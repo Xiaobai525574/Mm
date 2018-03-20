@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MemberManager</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="./layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="./css/xiao.css"  media="all">
+</head>
+<body>
+<div class="layui-main">
+  <div class="layui-row sel-h1">
+    <h1 class="layui-col-md8 sel-nav-left">人员管理</h1>
+    <ul class="sel-nav-right">
+        <li class="sel-login">登陆者：晓白</li>
+        <li class="sel-login">登录时间：2018/3/16</li>
+        <li>
+        <button class="layui-btn layui-btn-xs layui-btn-radius layui-btn-normal sel-login-btn" style="width: 64px;">退出</button>
+        </li>
+    </ul>
+  </div>
+  <hr class="layui-bg-green">
+  <div class="layui-row sel-condition">
+    <div class="layui-col-md4 layui-form">
+      <label class="layui-form-label">条件名：</label>
+      <div class="layui-input-block" style="width: 260px;">
+        <select name="city" lay-verify="required">
+          <option value=""></option>
+          <option value="0">北京</option>
+          <option value="1">上海</option>
+          <option value="2">广州</option>
+          <option value="3">深圳</option>
+          <option value="4">杭州</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="layui-row layui-form sel-search">
+    <div class="layui-row">
+      <div class="layui-form-item layui-col-md4">
+        <label class="layui-form-label">条件名：</label>
+        <div class="layui-input-block" style="width: 260px;">
+          <input type="text" name="title" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class=" layui-col-md3 layui-col-md-offset5">
+        <div class="right">
+          <button class="layui-btn">增加</button>
+          <button class="layui-btn">删除</button>
+          <button class="layui-btn">更新</button>
+        </div>
+      </div>
+    </div>
+    <div class="layui-row layui-form-item">
+      <label class="layui-form-label">日&nbsp;&nbsp;&nbsp;&nbsp;期：</label>
+      <div class="layui-input-block">
+        <div class="layui-input-inline" style="width: 117px;">
+          <input type="text" class="layui-input sel-date" id="searchTimeStart"> 
+        </div>
+        <div class="layui-form-mid" style="width: 6px">-</div>
+        <div class="layui-input-inline" style="width: 117px;">
+          <input type="text" class="layui-input sel-date" id="searchTimeEnd">
+        </div>
+        <input class="searchTime" type="radio" name="searchTime" title="最近15日" lay-skin="primary" checked>
+        <input class="searchTime" type="radio" name="searchTime" title="最近30日" lay-skin="primary"> 
+        <input class="searchTime" type="radio" name="searchTime" title="最近60日" lay-skin="primary"> 
+        <input class="searchTime" type="radio" name="searchTime" title="最近90日" lay-skin="primary"> 
+      </div>
+    </div>
+    <div class="layui-row">
+      <div class="layui-col-md3 layui-form">
+        <label class="layui-form-label">部&nbsp;&nbsp;&nbsp;&nbsp;门：</label>
+        <div class="layui-input-block">
+          <select name="city" lay-verify="required">
+            <option value=""></option>
+            <option value="0">北京</option>
+            <option value="1">上海</option>
+            <option value="2">广州</option>
+            <option value="3">深圳</option>
+            <option value="4">杭州</option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-col-md3 layui-form">
+        <label class="layui-form-label">项&nbsp;&nbsp;&nbsp;&nbsp;目：</label>
+        <div class="layui-input-block">
+          <select name="city" lay-verify="required">
+            <option value=""></option>
+            <option value="0">北京</option>
+            <option value="1">上海</option>
+            <option value="2">广州</option>
+            <option value="3">深圳</option>
+            <option value="4">杭州</option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-col-md3 layui-form">
+        <label class="layui-form-label">姓&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+        <div class="layui-input-block">
+          <select name="city" lay-verify="required">
+            <option value=""></option>
+            <option value="0">北京</option>
+            <option value="1">上海</option>
+            <option value="2">广州</option>
+            <option value="3">深圳</option>
+            <option value="4">杭州</option>
+          </select>
+        </div>
+      </div>
+      <div class="layui-col-md3">
+        <button class="layui-btn right">删除</button>
+      </div>
+    </div>
+  </div>
+  <div class="layui-row sel-info">
+    <div class="layui-col-md11 sel-info-list">
+      <label class="layui-form-label">结&nbsp;&nbsp;&nbsp;&nbsp;果：</label>
+    </div>
+    <div class="layui-col-md1 sel-info-btn">
+      <button class="layui-btn right">导出</button>
+    </div>
+  </div>
+  <div class="layui-row">
+    <table class="layui-hide" id="memberTable"></table>
+     
+    <script type="text/html" id="selectTpl">
+      <select name="project" lay-filter="memberSelect" lay-verify="" lay-search>
+        <option value="">请</option>
+        <option value="010">YAC</option>
+        <option value="021">KP</option>
+        <option value="0571">NTT</option>
+      </select>  
+    </script>
+  </div>
+</div>
+
+<script src="./layui/layui.js" charset="utf-8"></script>
+<script>
+layui.use(['table', 'form', 'laydate'], function(){
+  var table = layui.table
+  ,form = layui.form
+  ,laydate = layui.laydate;
+
+  /*日期与时间选择*/
+  laydate.render({
+      elem: '#searchTimeStart'
+    });
+  laydate.render({
+    elem: '#searchTimeEnd'
+  });
+
+  /*生成表格*/
+  table.render({
+    elem: '#memberTable'
+    ,url:'./xiao.json'
+    ,cellMinWidth: 80
+    ,cols: [[
+        {field:'username', title:'姓名', width:120, align:'center', rowspan:'2', fixed:'left'}
+        ,{field:'position', title:'职位', width:120, align:'center', rowspan:'2', fixed:'left', sort: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+        ,{field:'project', title:'03/01(星期一)', width:150, templet: '#selectTpl', align:'center', unresize: true}
+      ]]
+    ,limit: 10
+    ,page: true
+  });
+
+  /*添加下拉选择框*/
+  form.render('select', 'memberSelect');
+
+  $('.searchTime').attr('checked', false);
+});
+</script>
+</body>
+</html>
